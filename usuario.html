@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <title>Formulario de creación de usuario</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Agregar los archivos CSS de Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <body>
+        <div class="container mt-5">
+            <h2 class="text-center mb-5">Formulario de creación de usuario</h2>
+            <form id="form-crear-usuario" method="post" action="crearUsuario.php" onsubmit="return validarFormulario()">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su nombre" id="nombre" name="nombre">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="rut">RUT*</label>
+                        <input type="text" class="form-control" id="rut" name="rut" maxlength="8" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dv">DV*</label>
+                        <input type="text" class="form-control" id="dv" name="dv" maxlength="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" maxlength="250">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" class="form-control" id="email" name="email" maxlength="200" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password">Password*</label>
+                        <input type="password" class="form-control" id="password" name="password" minlength="6" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirmar-password">Confirmar Password*</label>
+                        <input type="password" class="form-control" id="confirmar-password" name="confirmar-password" minlength="6" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="genero">Género</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genero" id="genero-hombre" value="Hombre">
+                        <label class="form-check-label" for="genero-hombre">Hombre</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genero" id="genero-mujer" value="Mujer">
+                        <label class="form-check-label" for="genero-mujer">Mujer</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genero" id="genero-otro" value="Otro">
+                        <label class="form-check-label" for="genero-otror">Otro</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="banco">Banco:</label>
+                        <select class="form-control" id="banco" name="banco" required>
+                            <option value="">Seleccionar banco</option>
+                            <option value="Banco Estado">Banco Estado</option>
+                            <option value="Banco Chile">Banco Chile</option>
+                            <option value="Banco Santander">Banco Santander</option>
+                            <option value="Banco BCI">Banco BCI</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cuenta-bancaria">Número de cuenta bancaria:</label>
+                        <input type="text" class="form-control" id="cuenta-bancaria" name="cuenta-bancaria" min="8" max="20" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Crear usuario</button>
+                    </div>
+            </form>
+        </div>
+        <!-- Agregar los archivos JavaScript de Bootstrap y el script de validación -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script>
+		// Función de validación del formulario
+		function validarFormulario() {
+			// Validar que las contraseñas coincidan
+			if (document.getElementById("password").value != document.getElementById("password-confirm").value) {
+				alert("Las contraseñas no coinciden.");
+				return false;
+			}
+			// Validar que el email sea válido
+			var email = document.getElementById("email").value;
+			if (!/\S+@\S+\.\S+/.test(email)) {
+				alert("El email ingresado no es válido.");
+				return false;
+			}
+			// Validar que la contraseña tenga al menos 3 caracteres
+			if (document.getElementById("password").value.length < 3) {
+				alert("La contraseña debe tener al menos 3 caracteres.");
+				return false;
+			}
+			// Validar que se haya seleccionado un banco
+			if (document.getElementById("banco").value == "") {
+				alert("Debe seleccionar un banco.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+    </body>
+</html>
